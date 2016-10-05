@@ -8,3 +8,9 @@ class Model(object):
         self.fields = fields
         self.version = version
         self.fcn = fcn
+
+    def execute(self, data):
+
+        results = self.fcn(data)
+
+        return results
