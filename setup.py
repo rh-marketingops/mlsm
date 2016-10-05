@@ -7,20 +7,20 @@ import os
 import sys
 
 # import the necessary files
-#import pkgDir
+import mlsm
 
 setup(
-    name='pkgName',
-    version=pkgDir.__version__,
-    url='git repo link',
+    name='mlsm',
+    version=mlsm.__version__,
+    url='https://github.com/rh-marketingops/mlsm',
     license='GNU General Public License',
     author='Jeremiah Coleman',
     tests_require=['nose', 'mongomock>=3.5.0'],
     install_requires=[],
     author_email='colemanja91@gmail.com',
-    description='Put a short description here',
+    description='Implementation of multiple data science models',
     #long_description=readme(),
-    packages=['pkgName'],
+    packages=['pymongo>=3.3.0'],
     include_package_data=True,
     platforms='any',
     test_suite = 'nose.collector',
@@ -35,5 +35,5 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Software Development :: Libraries :: Application Frameworks'
         ],
-    keywords = 'put some keywords here'
+    keywords = 'data science lead scoring marketing automation'
 )
