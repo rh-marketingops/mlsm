@@ -15,8 +15,26 @@ import mlsm
 
 db = mongomock.MongoClient().db
 
-queueName = 'test'
-
 ###############################################################################
 ## Test Definitions
 ###############################################################################
+
+# create model check name
+def test_createNewModelCheckName():
+    fieldset = {
+        'field1': int,
+        'field2': str,
+        'field3': float
+    }
+    testmodel = mlsm.Model(name='test', fields=fieldset)
+    assert testmodel.name == 'test'
+
+# create model check field listing
+def test_createNewModelCheckFields():
+    fieldset = {
+        'field1': int,
+        'field2': str,
+        'field3': float
+    }
+    testmodel = mlsm.Model(name='test', fields=fieldset)
+    assert testmodel.fields == fieldset
