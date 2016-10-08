@@ -76,6 +76,16 @@ def test_modelExecRejectBadDataFields():
     results = testmodel.execute(data={'a': 1, 'b': 2, 'badfield': 5}, results={})
 
 @raises(Exception)
-def test_modelExecRejectMissingFields():
+def test_modelExecRejectMissingDataFields():
     testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     results = testmodel.execute(data={'a': 1}, results={})
+
+@raises(Exception)
+def test_modelExecRejectMissingResultsSet():
+    testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add, resultSet = {'test5': []})
+    results = testmodel.execute(data={'a': 1, 'b': 2}, results={})
+
+@raises(Exception)
+def test_modelExecRejectMissingResultsFields():
+    testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add, resultSet = {'test5': []})
+    results = testmodel.execute(data={'a': 1, 'b': 2}, results={'test5': {}})
