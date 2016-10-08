@@ -1,4 +1,19 @@
 
+def RunAllModels(models, records):
+
+    for model in models:
+
+        records = RunModel(model, records)
+
+    return records
+
+def RunModel(model, records):
+
+    for row in records:
+
+        model.execute(data = row['data'], results = row['results'])
+
+    return records
 
 class Model(object):
 
