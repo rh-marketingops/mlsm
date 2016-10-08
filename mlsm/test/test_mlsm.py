@@ -50,21 +50,32 @@ def test_createNewModelCheckVersion():
 # create model check basic fcn True
 def test_createNewModelCheckBasicFcn():
     testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_good_fieldset, version=version, fcn = test_fcn.basic_fcn_good)
-    assert testmodel.fcn(data={})
+    assert testmodel.fcn(data={}, results={})
 
 # basic addition model
 def test_createNewModelCheckAddFcn():
     testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
-    results = testmodel.fcn(data={'a': 1, 'b': 2})
+    results = testmodel.fcn(data={'a': 1, 'b': 2}, results={})
     assert results['c'] == 3
 
 def test_createNewModelRun():
     testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
-    results = testmodel.execute(data={'a': 1, 'b': 2})
-    assert results['c'] == 3
+    results = testmodel.execute(data={'a': 1, 'b': 2}, results={})
+    assert results['test']['c'] == 3
 
-@raises()
-def test_createNewModelRun():
+def test_createNewModelUseResults():
+    testmodel1 = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
+    results1 = testmodel1.execute(data={'a': 1, 'b': 2}, results={})
+    testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add_useresults)
+    results2 = testmodel2.execute(data={'a': 1, 'b': 2}, results=results1)
+    assert results2['test2']['d'] == 6
+
+@raises(Exception)
+def test_modelExecRejectBadDataFields():
     testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
-    results = testmodel.execute(data={'a': 1, 'b': 2, 'd': 3})
-    assert results['c'] == 3
+    results = testmodel.execute(data={'a': 1, 'b': 2, 'badfield': 5}, results={})
+
+@raises(Exception)
+def test_modelExecRejectMissingFields():
+    testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
+    results = testmodel.execute(data={'a': 1}, results={})

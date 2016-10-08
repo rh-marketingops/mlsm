@@ -9,8 +9,15 @@ class Model(object):
         self.version = version
         self.fcn = fcn
 
-    def execute(self, data):
+    def execute(self, data, results):
 
-        results = self.fcn(data)
+        for field in self.fields.keys():
+            if field not in data.keys():
+                raise Exception("Expected 'data' input '" + field + "' not found")
+        for field in data.keys():
+            if field not in self.fields.keys():
+                raise Exception("'data' input '" + field + "' unexpected")
+
+        results[self.name] = self.fcn(data=data, results=results)
 
         return results
