@@ -61,14 +61,12 @@ def test_createNewModelCheckAddFcn():
 def test_createNewModelRun():
     testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     results = testmodel.execute(data={'a': 1, 'b': 2}, results={})
-    assert results['test']['c'] == 3
+    assert results['test']['results']['c'] == 3
 
-def test_createNewModelUseResults():
-    testmodel1 = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
-    results1 = testmodel1.execute(data={'a': 1, 'b': 2}, results={})
-    testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add_useresults)
-    results2 = testmodel2.execute(data={'a': 1, 'b': 2}, results=results1)
-    assert results2['test2']['d'] == 6
+def test_modelRunResultModelVersion():
+    testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
+    results = testmodel.execute(data={'a': 1, 'b': 2}, results={})
+    assert results['test']['_version'] == '0.0.0'
 
 @raises(Exception)
 def test_modelExecRejectBadDataFields():
@@ -84,8 +82,3 @@ def test_modelExecRejectMissingDataFields():
 def test_modelExecRejectMissingResultsSet():
     testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add, resultSet = {'test5': []})
     results = testmodel.execute(data={'a': 1, 'b': 2}, results={})
-
-@raises(Exception)
-def test_modelExecRejectMissingResultsFields():
-    testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add, resultSet = {'test5': []})
-    results = testmodel.execute(data={'a': 1, 'b': 2}, results={'test5': {}})
