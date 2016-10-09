@@ -38,3 +38,15 @@ class Model(object):
         results[self.name]['_version'] = self.version
 
         return results
+
+class SummaryModel(Model):
+
+    def __init__(self, name, models, version, fcn):
+
+        self.name=name
+        self.models=models
+        self.version=version
+        self.fcn=fcn
+
+        self.model = Model(name=self.name, fields={}, version=self.version, fcn = self.fcn)
+        

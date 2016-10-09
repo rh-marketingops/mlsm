@@ -80,6 +80,16 @@ def test_modelExecRejectMissingDataFields():
     results = testmodel.execute(data={'a': 1}, results={})
 
 ###############################################################################
+## Summary model class
+###############################################################################
+
+def test_SummaryModelName():
+    testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
+    testsummodel = mlsm.SummaryModel(name='testSummary', models = [testmodel], version=version, fcn = test_fcn.basic_sum_fcn)
+    assert testsummodel.name=='testSummary'
+
+
+###############################################################################
 ## Run model against all records
 ###############################################################################
 
@@ -102,3 +112,15 @@ def test_modelRunAllModelsAllRecords():
     testResults = mlsm.RunAllModels(models = [testmodel1, testmodel2, testmodel3], records = testData)
     for row in testResults:
         assert 'test1' in row['results'] and 'test2' in row['results'] and 'test3' in row['results']
+
+###############################################################################
+## Run all models and run a summary function which references other models
+###############################################################################
+#
+# def test_modelRunSummary():
+#     testData = test_data.modelRunSummary
+#     testmodel1 = mlsm.Model(name='test1', fields=test_fcn.basic_fcn_add_fieldset_1, version=version, fcn = test_fcn.basic_fcn_add)
+#     testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset_2, version=version, fcn = test_fcn.basic_fcn_add)
+#     testmodel3 = mlsm.Model(name='test3', fields=test_fcn.basic_fcn_add_fieldset_3, version=version, fcn = test_fcn.basic_fcn_add)
+#     summaryModel = mlsm.summaryModel()
+#     testResults = mlsm.RunAllModels(models = [testmodel1, testmodel2, testmodel3], records = testData)
