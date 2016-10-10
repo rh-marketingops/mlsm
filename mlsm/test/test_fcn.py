@@ -28,4 +28,6 @@ def basic_fcn_add_useresults(data, results):
     return results
 
 def basic_sum_fcn(data, results):
-    return True
+    x = results['test']['c']
+    y = x + 5
+    return y

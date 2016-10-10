@@ -88,6 +88,32 @@ def test_SummaryModelName():
     testsummodel = mlsm.SummaryModel(name='testSummary', models = [testmodel], version=version, fcn = test_fcn.basic_sum_fcn)
     assert testsummodel.name=='testSummary'
 
+def test_SummaryModelModels():
+    testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
+    testsummodel = mlsm.SummaryModel(name='testSummary', models = [testmodel], version=version, fcn = test_fcn.basic_sum_fcn)
+    assert testsummodel.models==[testmodel]
+
+def test_SummaryModelVersion():
+    testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
+    testsummodel = mlsm.SummaryModel(name='testSummary', models = [testmodel], version=version, fcn = test_fcn.basic_sum_fcn)
+    assert testsummodel.version==version
+
+def test_SummaryModelFcn():
+    testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
+    testsummodel = mlsm.SummaryModel(name='testSummary', models = [testmodel], version=version, fcn = test_fcn.basic_sum_fcn)
+    assert testsummodel.fcn==test_fcn.basic_sum_fcn
+
+def test_SummaryModelFields():
+    testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
+    testsummodel = mlsm.SummaryModel(name='testSummary', models = [testmodel], fields=test_fcn.basic_fcn_good_fieldset, version=version, fcn = test_fcn.basic_sum_fcn)
+    assert testsummodel.fields==test_fcn.basic_fcn_good_fieldset
+
+def test_SummaryModelBasicAdd():
+    testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
+    testsummodel = mlsm.SummaryModel(name='testSummary', models = [testmodel], fields=test_fcn.basic_fcn_good_fieldset, version=version, fcn = test_fcn.basic_sum_fcn)
+    results1 = testmodel.execute(data={'a': 1, 'b': 2}, results={})
+    results2 = testsummodel.execute(data={'a': 1, 'b': 2}, results=results1)
+    assert results2['testSummary'] == 8
 
 ###############################################################################
 ## Run model against all records
