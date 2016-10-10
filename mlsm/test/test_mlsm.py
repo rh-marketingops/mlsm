@@ -4,7 +4,6 @@
 
 import time
 from nose.tools import *
-from mock import patch
 
 import mlsm
 
