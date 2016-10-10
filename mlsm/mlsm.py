@@ -1,6 +1,9 @@
 
 def RunAllModels(models, records, summaryModels=[]):
 
+    for row in records:
+        row['results'] = {}
+
     for model in models:
 
         records = RunModel(model, records)
@@ -15,7 +18,7 @@ def RunModel(model, records):
 
     for row in records:
 
-        model.execute(data = row['data'], results = row['results'])
+        x = model.execute(data = row['data'], results = row['results'])
 
     return records
 

@@ -2,7 +2,6 @@
 ## imports
 ###############################################################################
 
-import mongomock
 import time
 from nose.tools import *
 from mock import patch
@@ -11,12 +10,6 @@ import mlsm
 
 from . import test_fcn
 from . import test_data
-
-###############################################################################
-## setup test db
-###############################################################################
-
-db = mongomock.MongoClient().db
 
 ###############################################################################
 ## setup basic config
