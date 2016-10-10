@@ -36,9 +36,6 @@ class Model(object):
         for field in self.fields.keys():
             if field not in data.keys():
                 raise Exception("Expected 'data' input '" + field + "' not found")
-        for field in data.keys():
-            if field not in self.fields.keys():
-                raise Exception("'data' input '" + field + "' unexpected")
 
         results[self.name] = {}
         results[self.name]['results'] = self.fcn(data=data, results=results)

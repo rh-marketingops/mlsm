@@ -62,11 +62,6 @@ def test_modelRunResultModelVersion():
     assert results['test']['_version'] == '0.0.0'
 
 @raises(Exception)
-def test_modelExecRejectBadDataFields():
-    testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
-    results = testmodel.execute(data={'a': 1, 'b': 2, 'badfield': 5}, results={})
-
-@raises(Exception)
 def test_modelExecRejectMissingDataFields():
     testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     results = testmodel.execute(data={'a': 1}, results={})
