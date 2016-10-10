@@ -1,7 +1,11 @@
 
-def RunAllModels(models, records):
+def RunAllModels(models, records, summaryModels=[]):
 
     for model in models:
+
+        records = RunModel(model, records)
+
+    for model in summaryModels:
 
         records = RunModel(model, records)
 
