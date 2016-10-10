@@ -16,27 +16,31 @@ def basic_fcn_add(data, results):
     a = data['a']
     b = data['b']
     c = a+b
-    results['c'] = c
-    return results
+    resultsReturn = {}
+    resultsReturn['c'] = c
+    return resultsReturn
 
 def basic_fcn_add_useresults(data, results):
     a = data['a']
     b = data['b']
     c = results['test']['c']
     d = a+b+c
-    results['d'] = d
-    return results
+    resultsReturn = {}
+    resultsReturn['d'] = d
+    return resultsReturn
 
 def basic_sum_fcn(data, results):
     x = results['test']['results']['c']
     y = x + 5
-    results['d'] = y
-    return results
+    resultsReturn = {}
+    resultsReturn['d'] = y
+    return resultsReturn
 
 def basic_sum_fcn_multiple(data, results):
     x1 = results['test1']['results']['c']
     x2 = results['test2']['results']['c']
     x3 = results['test3']['results']['c']
     y = x1+x2+x3
-    results['d'] = y
-    return results
+    resultsReturn = {}
+    resultsReturn['d'] = y
+    return resultsReturn
