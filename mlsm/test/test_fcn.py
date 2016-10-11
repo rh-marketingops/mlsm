@@ -30,16 +30,16 @@ def basic_fcn_add_useresults(data, results):
     return resultsReturn
 
 def basic_sum_fcn(data, results):
-    x = results['test']['results']['c']
+    x = results['test']['0.0.0']['c']
     y = x + 5
     resultsReturn = {}
     resultsReturn['d'] = y
     return resultsReturn
 
 def basic_sum_fcn_multiple(data, results):
-    x1 = results['test1']['results']['c']
-    x2 = results['test2']['results']['c']
-    x3 = results['test3']['results']['c']
+    x1 = results['test1']['0.0.0']['c']
+    x2 = results['test2']['0.0.0']['c']
+    x3 = results['test3']['0.0.0']['c']
     y = x1+x2+x3
     resultsReturn = {}
     resultsReturn['d'] = y

@@ -54,12 +54,12 @@ def test_createNewModelCheckAddFcn():
 def test_createNewModelRun():
     testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     results = testmodel.execute(data={'a': 1, 'b': 2}, results={})
-    assert results['test']['results']['c'] == 3
+    assert results['test'][version]['c'] == 3
 
 def test_modelRunResultModelVersion():
     testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     results = testmodel.execute(data={'a': 1, 'b': 2}, results={})
-    assert results['test']['_version'] == '0.0.0'
+    assert version in results['test']
 
 @raises(Exception)
 def test_modelExecRejectMissingDataFields():
@@ -100,7 +100,7 @@ def test_SummaryModelBasicAdd():
     testsummodel = mlsm.SummaryModel(name='testSummary', models = [testmodel], fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_sum_fcn)
     results1 = testmodel.execute(data={'a': 1, 'b': 2}, results={})
     results2 = testsummodel.execute(data={'a': 1, 'b': 2}, results=results1)
-    assert results2['testSummary']['results']['d'] == 8
+    assert results2['testSummary'][version]['d'] == 8
 
 @raises(Exception)
 def test_SummaryModelNoModelResults():

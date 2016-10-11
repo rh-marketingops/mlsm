@@ -38,8 +38,7 @@ class Model(object):
                 raise Exception("Expected 'data' input '" + field + "' not found")
 
         results[self.name] = {}
-        results[self.name]['results'] = self.fcn(data=data, results=results)
-        results[self.name]['_version'] = self.version
+        results[self.name][self.version] = self.fcn(data=data, results=results)
 
         return results
 
