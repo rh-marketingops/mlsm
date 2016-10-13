@@ -1,26 +1,35 @@
 
-def RunAllModels(models, records, summaryModels=[]):
+def RunModelsAll(models, records, summaryModels=[]):
 
-    for row in records:
-        row['results'] = {}
+    for record in records:
+
+        record = RunModels(models, record)
+
+        record = RunSummaryModels(summaryModels, record)
+
+    return records
+
+def RunModels(models, record):
+
+    record['results'] = {}
 
     for model in models:
 
-        records = RunModel(model, records)
+        x = model.execute(data = record['data'], results = record['results'])
+
+        record['results'][model.name][model.version] = x
+
+    return record
+
+def RunSummaryModels(summaryModels, record):
 
     for model in summaryModels:
 
-        records = RunModel(model, records)
+        x = model.execute(data = record['data'], results = record['results'])
 
-    return records
+        record['results'][model.name][model.version] = x
 
-def RunModel(model, records):
-
-    for row in records:
-
-        x = model.execute(data = row['data'], results = row['results'])
-
-    return records
+    return record
 
 class Model(object):
 
@@ -51,3 +60,8 @@ class SummaryModel(Model):
         self.version=version
         self.fcn=fcn
         self.fields=fields
+
+class SummaryModelListException(Exception):
+
+    def __init__(self,*args,**kwargs):
+        Exception.__init__(self,*args,**kwargs)
