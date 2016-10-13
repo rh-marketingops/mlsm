@@ -114,6 +114,14 @@ def test_modelRunAllModelsOneRecord():
     testResults = mlsm.RunModels(models = [testmodel1, testmodel2, testmodel3], record = testData)
     assert 'test1' in testResults['results'] and 'test2' in testResults['results'] and 'test3' in testResults['results']
 
+def test_modelRunAllModelsOneRecordResults():
+    testData = test_data.modelRunAllModelsOneRecord
+    testmodel1 = mlsm.Model(name='test1', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
+    testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
+    testmodel3 = mlsm.Model(name='test3', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
+    testResults = mlsm.RunModels(models = [testmodel1, testmodel2, testmodel3], record = testData)
+    assert 'c' in testResults['results']['test1']['0.0.0'] and 'c' in testResults['results']['test2']['0.0.0'] and 'c' in testResults['results']['test3']['0.0.0']
+
 ###############################################################################
 ## Run all models against all records
 ###############################################################################
@@ -138,23 +146,14 @@ def test_modelRunAllModelsAllRecordsLen():
 ###############################################################################
 ## Run all models and run a summary function which references other models
 ###############################################################################
-
-def test_RunAllRunSummary():
-    testData = test_data.modelRunSummary
-    testmodel1 = mlsm.Model(name='test1', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
-    testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
-    testmodel3 = mlsm.Model(name='test3', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
-    summodellist = [{'name': 'test1', 'version': version}, {'name': 'test2', 'version': version}, {'name': 'test3', 'version': version}]
-    testsummodel = mlsm.SummaryModel(name='testSummary', models = summodellist, fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_sum_fcn_multiple)
-    testResults = mlsm.RunModelsAll(models = [testmodel1, testmodel2, testmodel3], summaryModels=[testsummodel], records = testData)
-    for row in testResults:
-        assert 'testSummary' in row['results']
-
-# def test_RunAllRunSummaryLen():
+#
+# def test_RunAllRunSummary():
 #     testData = test_data.modelRunSummary
 #     testmodel1 = mlsm.Model(name='test1', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
 #     testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
 #     testmodel3 = mlsm.Model(name='test3', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
-#     testsummodel = mlsm.SummaryModel(name='testSummary', models = [testmodel1, testmodel2, testmodel3], fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_sum_fcn_multiple)
-#     testResults = mlsm.RunAllModels(models = [testmodel1, testmodel2, testmodel3], summaryModels=[testsummodel], records = testData)
-#     assert len(testResults) == 3
+#     summodellist = [{'name': 'test1', 'version': version}, {'name': 'test2', 'version': version}, {'name': 'test3', 'version': version}]
+#     testsummodel = mlsm.SummaryModel(name='testSummary', models = summodellist, fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_sum_fcn_multiple)
+#     testResults = mlsm.RunModelsAll(models = [testmodel1, testmodel2, testmodel3], summaryModels=[testsummodel], records = testData)
+#     for row in testResults:
+#         assert 'testSummary' in row['results']

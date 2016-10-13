@@ -1,13 +1,17 @@
 
 def RunModelsAll(models, records, summaryModels=[]):
 
+    returnRecords = []
+
     for record in records:
 
         record = RunModels(models, record)
 
         record = RunSummaryModels(summaryModels, record)
 
-    return records
+        returnRecords.append(record)
+
+    return returnRecords
 
 def RunModels(models, record):
 
@@ -17,7 +21,7 @@ def RunModels(models, record):
 
         x = model.execute(data = record['data'], results = record['results'])
 
-        record['results'][model.name][model.version] = x
+        record['results'] = x
 
     return record
 
@@ -25,9 +29,7 @@ def RunSummaryModels(summaryModels, record):
 
     for model in summaryModels:
 
-        x = model.execute(data = record['data'], results = record['results'])
-
-        record['results'][model.name][model.version] = x
+        record['results'] = model.execute(data = record['data'], results = record['results'])
 
     return record
 

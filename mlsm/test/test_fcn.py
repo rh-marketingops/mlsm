@@ -20,15 +20,6 @@ def basic_fcn_add(data, results):
     resultsReturn['c'] = c
     return resultsReturn
 
-def basic_fcn_add_useresults(data, results):
-    a = data['a']
-    b = data['b']
-    c = results['test']['c']
-    d = a+b+c
-    resultsReturn = {}
-    resultsReturn['d'] = d
-    return resultsReturn
-
 def basic_sum_fcn(data, results):
     x = results['test']['0.0.0']['c']
     y = x + 5
