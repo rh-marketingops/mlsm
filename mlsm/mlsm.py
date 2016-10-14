@@ -29,6 +29,12 @@ def RunSummaryModels(summaryModels, record):
 
     for model in summaryModels:
 
+        for dep in model.models:
+            if dep['name'] not in record['results']:
+                raise SummaryModelListException("Expected model '" + dep['name'] + "' results not found")
+            if dep['version'] not in record['results'][dep['name']]:
+                raise SummaryModelListException("Expected model version '" + dep['name'] + "' '" + dep['version'] + "' results not found")
+
         record['results'] = model.execute(data = record['data'], results = record['results'])
 
     return record
