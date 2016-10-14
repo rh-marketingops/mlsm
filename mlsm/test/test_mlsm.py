@@ -143,6 +143,14 @@ def test_modelRunAllModelsAllRecordsLen():
     testResults = mlsm.RunModelsAll(models = [testmodel1, testmodel2, testmodel3], records = testData)
     assert len(testResults) == 3
 
+def test_modelRunAllModelsAllRecordsVerbose():
+    testData = test_data.modelRunAllModelsAllRecords
+    testmodel1 = mlsm.Model(name='test1', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
+    testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
+    testmodel3 = mlsm.Model(name='test3', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
+    testResults = mlsm.RunModelsAll(models = [testmodel1, testmodel2, testmodel3], records = testData, verbose = True)
+    assert len(testResults) == 3
+
 ###############################################################################
 ## Run all models and run a summary function which references other models
 ###############################################################################

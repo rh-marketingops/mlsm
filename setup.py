@@ -16,7 +16,7 @@ setup(
     license='GNU General Public License',
     author='Jeremiah Coleman',
     tests_require=['nose'],
-    install_requires=[],
+    install_requires=['tqdm'],
     author_email='colemanja91@gmail.com',
     description='Implementation of multiple data science models',
     #long_description=readme(),

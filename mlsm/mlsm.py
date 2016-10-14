@@ -1,15 +1,28 @@
+from tqdm import tqdm
 
-def RunModelsAll(models, records, summaryModels=[]):
+def RunModelsAll(models, records, summaryModels=[], verbose = False):
 
     returnRecords = []
 
-    for record in records:
+    if verbose:
 
-        record = RunModels(models, record)
+        for record in tqdm(records):
 
-        record = RunSummaryModels(summaryModels, record)
+            record = RunModels(models, record)
 
-        returnRecords.append(record)
+            record = RunSummaryModels(summaryModels, record)
+
+            returnRecords.append(record)
+
+    else:
+
+        for record in records:
+
+            record = RunModels(models, record)
+
+            record = RunSummaryModels(summaryModels, record)
+
+            returnRecords.append(record)
 
     return returnRecords
 
