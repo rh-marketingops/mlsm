@@ -2,4 +2,4 @@
 
 from .mlsm import Model, RunModels, RunModelsAll, SummaryModel, SummaryModelListException
 
-__version__ = '0.0.1'
+__version__ = '0.0.2'
