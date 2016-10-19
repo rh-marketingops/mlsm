@@ -1,19 +1,19 @@
 modelRunAllRecords = [
-    {'_id': 1, 'data': {'a': 1, 'b': 2}, 'results': {}},
-    {'_id': 2, 'data': {'a': 1, 'b': 2}, 'results': {}},
-    {'_id': 3, 'data': {'a': 1, 'b': 2}, 'results': {}}
+    {'id': 1, 'data': {'a': 1, 'b': 2}, 'results': {}},
+    {'id': 2, 'data': {'a': 1, 'b': 2}, 'results': {}},
+    {'id': 3, 'data': {'a': 1, 'b': 2}, 'results': {}}
 ]
 
 modelRunAllModelsAllRecords = [
-    {'_id': 1, 'data': {'a': 1, 'b': 2}},
-    {'_id': 2, 'data': {'a': 1, 'b': 2}},
-    {'_id': 3, 'data': {'a': 1, 'b': 2}}
+    {'id': 1, 'data': {'a': 1, 'b': 2}},
+    {'id': 2, 'data': {'a': 1, 'b': 2}},
+    {'id': 3, 'data': {'a': 1, 'b': 2}}
 ]
 
 modelRunSummary = [
-    {'_id': 1, 'data': {'a': 1, 'b': 2}},
-    {'_id': 2, 'data': {'a': 1, 'b': 2}},
-    {'_id': 3, 'data': {'a': 1, 'b': 2}}
+    {'id': 1, 'data': {'a': 1, 'b': 2}},
+    {'id': 2, 'data': {'a': 1, 'b': 2}},
+    {'id': 3, 'data': {'a': 1, 'b': 2}}
 ]
 
-modelRunAllModelsOneRecord = {'_id': 1, 'data': {'a': 1, 'b': 2}}
+modelRunAllModelsOneRecord = {'id': 1, 'data': {'a': 1, 'b': 2}}

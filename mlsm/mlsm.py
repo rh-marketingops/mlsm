@@ -1,28 +1,32 @@
 from tqdm import tqdm
+from pymongo import MongoClient
 
-def RunModelsAll(models, records, summaryModels=[], verbose = False):
+def RunModelsAll(models, records, summaryModels=[], verbose = False, db = None, collection = None, dbIdentifier = None):
 
     returnRecords = []
 
     if verbose:
-
-        for record in tqdm(records):
-
-            record = RunModels(models, record)
-
-            record = RunSummaryModels(summaryModels, record)
-
-            returnRecords.append(record)
-
+        runRecords = tqdm(records)
     else:
+        runRecords = records
 
-        for record in records:
+    for record in runRecords:
 
-            record = RunModels(models, record)
+        record = RunModels(models, record)
 
-            record = RunSummaryModels(summaryModels, record)
+        record = RunSummaryModels(summaryModels, record)
 
-            returnRecords.append(record)
+        returnRecords.append(record)
+
+        if db and collection and dbIdentifier:
+
+            recordInsert = {}
+
+            recordInsert[dbIdentifier] = record[dbIdentifier]
+
+            recordInsert['results'] = record['results']
+
+            db[collection].insert_one(recordInsert)
 
     return returnRecords
 
