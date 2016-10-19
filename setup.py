@@ -15,7 +15,7 @@ setup(
     url='https://github.com/rh-marketingops/mlsm',
     license='GNU General Public License',
     author='Jeremiah Coleman',
-    tests_require=['nose'],
+    tests_require=['nose', 'mongomock'],
     install_requires=['tqdm'],
     author_email='colemanja91@gmail.com',
     description='Implementation of multiple data science models',
