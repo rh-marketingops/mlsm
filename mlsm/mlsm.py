@@ -1,4 +1,5 @@
 from tqdm import tqdm
+from pymongo import MongoClient
 
 def RunModelsAll(models, records, summaryModels=[], verbose = False):
 
