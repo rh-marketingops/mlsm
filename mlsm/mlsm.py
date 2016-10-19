@@ -1,7 +1,7 @@
 from tqdm import tqdm
 from pymongo import MongoClient
 
-def RunModelsAll(models, records, summaryModels=[], verbose = False):
+def RunModelsAll(models, records, summaryModels=[], verbose = False, db = None, collection = None, dbIdentifier = None):
 
     returnRecords = []
 
@@ -15,6 +15,16 @@ def RunModelsAll(models, records, summaryModels=[], verbose = False):
 
             returnRecords.append(record)
 
+            if db and collection and dbIdentifier:
+
+                recordInsert = {}
+
+                recordInsert[dbIdentifier] = record[dbIdentifier]
+
+                recordInsert['results'] = record['results']
+
+                db[collection].insert_one(recordInsert)
+
     else:
 
         for record in records:
@@ -24,6 +34,16 @@ def RunModelsAll(models, records, summaryModels=[], verbose = False):
             record = RunSummaryModels(summaryModels, record)
 
             returnRecords.append(record)
+
+            if db and collection and dbIdentifier:
+
+                recordInsert = {}
+
+                recordInsert[dbIdentifier] = record[dbIdentifier]
+
+                recordInsert['results'] = record['results']
+
+                db[collection].insert_one(recordInsert)
 
     return returnRecords
 
