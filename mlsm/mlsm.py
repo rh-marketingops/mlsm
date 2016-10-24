@@ -44,7 +44,9 @@ def RunModels(models, record):
 
     for model in models:
 
-        x = model.execute(data = record['data'], results = record['results'])
+        data = record['data'][model.name][model.version]
+
+        x = model.execute(data = data, results = record['results'])
 
         record['results'] = x
 
@@ -54,13 +56,15 @@ def RunSummaryModels(summaryModels, record):
 
     for model in summaryModels:
 
+        data = record['data'][model.name][model.version]
+
         for dep in model.models:
             if dep['name'] not in record['results']:
                 raise SummaryModelListException("Expected model '" + dep['name'] + "' results not found")
             if dep['version'] not in record['results'][dep['name']]:
                 raise SummaryModelListException("Expected model version '" + dep['name'] + "' '" + dep['version'] + "' results not found")
 
-        record['results'] = model.execute(data = record['data'], results = record['results'])
+        record['results'] = model.execute(data = data, results = record['results'])
 
     return record
 

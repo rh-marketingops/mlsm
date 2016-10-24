@@ -117,7 +117,7 @@ def test_SummaryModelBasicAdd():
 ###############################################################################
 
 def test_modelRunAllModelsOneRecord():
-    testData = test_data.modelRunAllModelsOneRecord
+    testData = test_data.recordsOne
     testmodel1 = mlsm.Model(name='test1', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel3 = mlsm.Model(name='test3', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
@@ -125,19 +125,27 @@ def test_modelRunAllModelsOneRecord():
     assert 'test1' in testResults['results'] and 'test2' in testResults['results'] and 'test3' in testResults['results']
 
 def test_modelRunAllModelsOneRecordResults():
-    testData = test_data.modelRunAllModelsOneRecord
+    testData = test_data.recordsOne
     testmodel1 = mlsm.Model(name='test1', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel3 = mlsm.Model(name='test3', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testResults = mlsm.RunModels(models = [testmodel1, testmodel2, testmodel3], record = testData)
     assert 'c' in testResults['results']['test1']['0.0.0'] and 'c' in testResults['results']['test2']['0.0.0'] and 'c' in testResults['results']['test3']['0.0.0']
 
+@raises(Exception)
+def test_modelRunAllModelsOneRecordNoModelData():
+    testData = test_data.recordsOneNoModelData
+    testmodel1 = mlsm.Model(name='test1', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
+    testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
+    testmodel3 = mlsm.Model(name='test3', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
+    testResults = mlsm.RunModels(models = [testmodel1, testmodel2, testmodel3], record = testData)
+
 ###############################################################################
 ## Run all models against all records
 ###############################################################################
 
 def test_modelRunAllModelsAllRecords():
-    testData = test_data.modelRunAllModelsAllRecords
+    testData = test_data.recordsMulti
     testmodel1 = mlsm.Model(name='test1', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel3 = mlsm.Model(name='test3', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
@@ -146,7 +154,7 @@ def test_modelRunAllModelsAllRecords():
         assert 'test1' in row['results'] and 'test2' in row['results'] and 'test3' in row['results']
 
 def test_modelRunAllModelsAllRecordsLen():
-    testData = test_data.modelRunAllModelsAllRecords
+    testData = test_data.recordsMulti
     testmodel1 = mlsm.Model(name='test1', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel3 = mlsm.Model(name='test3', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
@@ -154,7 +162,7 @@ def test_modelRunAllModelsAllRecordsLen():
     assert len(testResults) == 3
 
 def test_modelRunAllModelsAllRecordsVerbose():
-    testData = test_data.modelRunAllModelsAllRecords
+    testData = test_data.recordsMulti
     testmodel1 = mlsm.Model(name='test1', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel3 = mlsm.Model(name='test3', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
@@ -166,7 +174,7 @@ def test_modelRunAllModelsAllRecordsVerbose():
 ###############################################################################
 
 def test_RunAllRunSummary():
-    testData = test_data.modelRunSummary
+    testData = test_data.recordsMulti
     testmodel1 = mlsm.Model(name='test1', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel3 = mlsm.Model(name='test3', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
@@ -177,7 +185,7 @@ def test_RunAllRunSummary():
         assert 'testSummary' in row['results']
 
 def test_RunAllRunSummaryLen():
-    testData = test_data.modelRunSummary
+    testData = test_data.recordsMulti
     testmodel1 = mlsm.Model(name='test1', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel3 = mlsm.Model(name='test3', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
@@ -188,7 +196,7 @@ def test_RunAllRunSummaryLen():
 
 def test_RunAllRunSummaryStoreResultsMongo():
     db['results'].drop()
-    testData = test_data.modelRunSummary
+    testData = test_data.recordsMulti
     testmodel1 = mlsm.Model(name='test1', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel3 = mlsm.Model(name='test3', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
@@ -210,7 +218,7 @@ def test_RunAllRunSummaryStoreResultsMongo():
 
 def test_RunAllRunSummaryStoreResultsMongoTimestamp():
     db['results'].drop()
-    testData = test_data.modelRunSummary
+    testData = test_data.recordsMulti
     testmodel1 = mlsm.Model(name='test1', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel3 = mlsm.Model(name='test3', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
@@ -222,7 +230,7 @@ def test_RunAllRunSummaryStoreResultsMongoTimestamp():
 
 def test_RunAllRunSummaryStoreResultsCount():
     db['results'].drop()
-    testData = test_data.modelRunSummaryOne
+    testData = test_data.recordsOneList
     testmodel1 = mlsm.Model(name='test1', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel3 = mlsm.Model(name='test3', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
@@ -238,7 +246,7 @@ def test_RunAllRunSummaryStoreResultsCount():
 
 def test_RunAllRunSummaryStoreResultsDraftStatus():
     db['results'].drop()
-    testData = test_data.modelRunSummary
+    testData = test_data.recordsMulti
     testmodel1 = mlsm.Model(name='test1', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add, status='active')
     testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add, status='draft')
     testmodel3 = mlsm.Model(name='test3', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add, status='active')
@@ -250,14 +258,14 @@ def test_RunAllRunSummaryStoreResultsDraftStatus():
 
 @raises(mlsm.SummaryModelListException)
 def test_RunSummaryNoResults():
-    testData = test_data.modelRunSummary
+    testData = test_data.recordsMulti
     summodellist = [{'name': 'test1', 'version': version}]
     testsummodel = mlsm.SummaryModel(name='testSummary', models = summodellist, fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_sum_fcn_multiple)
     testResults = mlsm.RunModelsAll(models = [], summaryModels=[testsummodel], records = testData)
 
 @raises(mlsm.SummaryModelListException)
 def test_RunSummaryWrongVersion():
-    testData = test_data.modelRunSummary
+    testData = test_data.recordsMulti
     testmodel1 = mlsm.Model(name='test1', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     summodellist = [{'name': 'test1', 'version': '0.0.1'}]
     testsummodel = mlsm.SummaryModel(name='testSummary', models = summodellist, fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_sum_fcn_multiple)
