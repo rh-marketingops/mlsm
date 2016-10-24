@@ -220,6 +220,22 @@ def test_RunAllRunSummaryStoreResultsMongoTimestamp():
     mongoResults = db['results'].find_one()
     assert '_timestamp' in mongoResults
 
+def test_RunAllRunSummaryStoreResultsCount():
+    db['results'].drop()
+    testData = test_data.modelRunSummaryOne
+    testmodel1 = mlsm.Model(name='test1', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
+    testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
+    testmodel3 = mlsm.Model(name='test3', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
+    summodellist = [{'name': 'test1', 'version': version}, {'name': 'test2', 'version': version}, {'name': 'test3', 'version': version}]
+    testsummodel = mlsm.SummaryModel(name='testSummary', models = summodellist, fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_sum_fcn_multiple)
+    testResults = mlsm.RunModelsAll(models = [testmodel1, testmodel2, testmodel3], summaryModels=[testsummodel], records = testData, db = db, collection = 'results', dbIdentifier='id')
+    testResults = mlsm.RunModelsAll(models = [testmodel1, testmodel2, testmodel3], summaryModels=[testsummodel], records = testData, db = db, collection = 'results', dbIdentifier='id')
+    mongoResults = db['results'].find()
+    x = []
+    for row in mongoResults:
+        x.append(row['_current'])
+    assert x[0]!=x[1]
+
 @raises(mlsm.SummaryModelListException)
 def test_RunSummaryNoResults():
     testData = test_data.modelRunSummary

@@ -16,4 +16,8 @@ modelRunSummary = [
     {'id': 3, 'data': {'a': 1, 'b': 2}}
 ]
 
+modelRunSummaryOne = [
+    {'id': 1, 'data': {'a': 1, 'b': 2}}
+]
+
 modelRunAllModelsOneRecord = {'id': 1, 'data': {'a': 1, 'b': 2}}

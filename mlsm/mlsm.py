@@ -21,9 +21,14 @@ def RunModelsAll(models, records, summaryModels=[], verbose = False, db = None, 
 
         if db and collection and dbIdentifier:
 
+            ## update _current on existing results
+            upd = db[collection].update_many({dbIdentifier: record[dbIdentifier]}, {'$inc': {'_current': 1}})
+
             recordInsert = {}
 
             recordInsert[dbIdentifier] = record[dbIdentifier]
+
+            recordInsert['_current'] = 0
 
             recordInsert['_timestamp'] = int(time.time())
 
