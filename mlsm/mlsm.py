@@ -66,12 +66,13 @@ def RunSummaryModels(summaryModels, record):
 
 class Model(object):
 
-    def __init__(self, name, fields, version, fcn):
+    def __init__(self, name, fields, version, fcn, status='draft'):
 
         self.name = name
         self.fields = fields
         self.version = version
         self.fcn = fcn
+        self.status = status
 
     def execute(self, data, results):
 
@@ -81,18 +82,20 @@ class Model(object):
 
         results[self.name] = {}
         results[self.name][self.version] = self.fcn(data=data, results=results)
+        results[self.name][self.version]['_status'] = self.status
 
         return results
 
 class SummaryModel(Model):
 
-    def __init__(self, name, models, version, fcn, fields={}):
+    def __init__(self, name, models, version, fcn, fields={}, status='draft'):
 
         self.name=name
         self.models=models
         self.version=version
         self.fcn=fcn
         self.fields=fields
+        self.status = status
 
 class SummaryModelListException(Exception):
 

@@ -236,6 +236,19 @@ def test_RunAllRunSummaryStoreResultsCount():
         x.append(row['_current'])
     assert x[0]!=x[1]
 
+def test_RunAllRunSummaryStoreResultsDraftStatus():
+    db['results'].drop()
+    testData = test_data.modelRunSummary
+    testmodel1 = mlsm.Model(name='test1', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add, status='active')
+    testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add, status='draft')
+    testmodel3 = mlsm.Model(name='test3', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add, status='active')
+    summodellist = [{'name': 'test1', 'version': version}, {'name': 'test2', 'version': version}, {'name': 'test3', 'version': version}]
+    testsummodel = mlsm.SummaryModel(name='testSummary', models = summodellist, fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_sum_fcn_multiple)
+    testResults = mlsm.RunModelsAll(models = [testmodel1, testmodel2, testmodel3], summaryModels=[testsummodel], records = testData, db = db, collection = 'results', dbIdentifier='id')
+    mongoResults = db['results'].find_one()
+    print(mongoResults)
+    assert mongoResults['results']['test2'][version]['_status']=='draft' and mongoResults['results']['test1'][version]['_status']=='active' and mongoResults['results']['test3'][version]['_status']=='active' and mongoResults['results']['testSummary'][version]['_status']=='draft'
+
 @raises(mlsm.SummaryModelListException)
 def test_RunSummaryNoResults():
     testData = test_data.modelRunSummary
