@@ -246,7 +246,6 @@ def test_RunAllRunSummaryStoreResultsDraftStatus():
     testsummodel = mlsm.SummaryModel(name='testSummary', models = summodellist, fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_sum_fcn_multiple)
     testResults = mlsm.RunModelsAll(models = [testmodel1, testmodel2, testmodel3], summaryModels=[testsummodel], records = testData, db = db, collection = 'results', dbIdentifier='id')
     mongoResults = db['results'].find_one()
-    print(mongoResults)
     assert mongoResults['results']['test2'][version]['_status']=='draft' and mongoResults['results']['test1'][version]['_status']=='active' and mongoResults['results']['test3'][version]['_status']=='active' and mongoResults['results']['testSummary'][version]['_status']=='draft'
 
 @raises(mlsm.SummaryModelListException)
