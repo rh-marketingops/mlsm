@@ -1,4 +1,5 @@
 from tqdm import tqdm
+import time
 from pymongo import MongoClient
 
 def RunModelsAll(models, records, summaryModels=[], verbose = False, db = None, collection = None, dbIdentifier = None):
@@ -23,6 +24,8 @@ def RunModelsAll(models, records, summaryModels=[], verbose = False, db = None, 
             recordInsert = {}
 
             recordInsert[dbIdentifier] = record[dbIdentifier]
+
+            recordInsert['_timestamp'] = int(time.time())
 
             recordInsert['results'] = record['results']
 
