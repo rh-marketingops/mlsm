@@ -134,12 +134,11 @@ def test_modelRunAllModelsOneRecordResults():
 
 @raises(Exception)
 def test_modelRunAllModelsOneRecordNoModelData():
-    testData = test_data.recordsOne
+    testData = test_data.recordsOneNoModelData
     testmodel1 = mlsm.Model(name='test1', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel3 = mlsm.Model(name='test3', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testResults = mlsm.RunModels(models = [testmodel1, testmodel2, testmodel3], record = testData)
-    assert 'test1' in testResults['results'] and 'test2' in testResults['results'] and 'test3' in testResults['results']
 
 ###############################################################################
 ## Run all models against all records
@@ -231,7 +230,7 @@ def test_RunAllRunSummaryStoreResultsMongoTimestamp():
 
 def test_RunAllRunSummaryStoreResultsCount():
     db['results'].drop()
-    testData = test_data.recordsMulti
+    testData = test_data.recordsOneList
     testmodel1 = mlsm.Model(name='test1', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel2 = mlsm.Model(name='test2', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     testmodel3 = mlsm.Model(name='test3', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
