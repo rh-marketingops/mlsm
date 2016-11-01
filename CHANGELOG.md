@@ -1,3 +1,6 @@
+## TBD v0.0.4
+- Added docs
+
 ## 2016-10-24 v0.0.3
 - To the results stored in MongoDB, add `_timestamp` and `_current` fields to allow cleanup of old results and easy querying of current results
 - To the results stored in MongoDB, under `model/version`, add `_status` to indicate whether or not, at runtime, the results were `active` or `draft`
