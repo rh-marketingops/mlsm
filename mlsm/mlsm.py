@@ -95,11 +95,7 @@ class Model(object):
     """
     Definition of a model; used as a wrapper for python functions for operational ease
     """
-
-<<<<<<< HEAD
     def __init__(self, name, fields, version, fcn, status='draft'):
-=======
-    def __init__(self, name, fields, version, fcn):
         """
         Initializes model object
 
@@ -108,7 +104,6 @@ class Model(object):
         :param str version: version identifier if experimenting with multiple iterations of the same model
         :param fcn fcn: function to execute
         """
->>>>>>> feature/initialDocs
 
         self.name = name
         self.fields = fields
@@ -138,11 +133,7 @@ class SummaryModel(Model):
     """
     Extension of Model; also validates input 'results' parameter to 'execute' to ensure results from previous models can be used
     """
-
-<<<<<<< HEAD
     def __init__(self, name, models, version, fcn, fields={}, status='draft'):
-=======
-    def __init__(self, name, models, version, fcn, fields={}):
         """
         Initializes SummaryModel object
 
@@ -152,7 +143,6 @@ class SummaryModel(Model):
         :param fcn fcn: function to execute
         :param dict fields: field names with expected type; will be used for validation of input; will be used for unit testing models in future versions
         """
->>>>>>> feature/initialDocs
 
         self.name=name
         self.models=models
