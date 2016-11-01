@@ -15,7 +15,15 @@ Challenges with other platforms:
 
 To address these challenges, we built the `mlsm` package.
 
-## Everything is a model
+Using a Python framework offers the following solutions:
+- _Limited modeling options; usually only simple "if-then" statements_
+  - Python offers direct access to data science standards, such as linear regression, random forests, and machine learning
+- _Slow processing times_
+  - By running Python on a server, we can add more resources to speed up processing as needed
+- _Lack of flexibility to quickly deploy new models_
+  - With a standardized architecture designed for multiple concurrent models, deploying new models is easy
+- _Lack of version control_
+  - By deploying with a Git-based system, can easily view changes and roll back to older code 
 
 # Architecture
 
