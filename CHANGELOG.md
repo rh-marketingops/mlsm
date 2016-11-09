@@ -1,5 +1,8 @@
 ## TBD v0.0.4
 - Added docs
+- Improved Model.execute validation
+  - Returns errors during `self.fcn()` in a results field `results/model/version/_error`
+  - Also returns errors for input field validation in the same way
 
 ## 2016-10-24 v0.0.3
 - To the results stored in MongoDB, add `_timestamp` and `_current` fields to allow cleanup of old results and easy querying of current results
