@@ -1,6 +1,7 @@
 from tqdm import tqdm
 import time
 from pymongo import MongoClient
+import sys
 
 def RunModelsAll(models, records, summaryModels=[], verbose = False, db = None, collection = None, dbIdentifier = None):
     """
@@ -124,8 +125,14 @@ class Model(object):
                 raise Exception("Expected 'data' input '" + field + "' not found")
 
         results[self.name] = {}
-        results[self.name][self.version] = self.fcn(data=data, results=results)
-        results[self.name][self.version]['_status'] = self.status
+        try:
+            results[self.name][self.version] = self.fcn(data=data, results=results)
+            results[self.name][self.version]['_status'] = self.status
+        except:
+            err1 = sys.exc_info()[1]
+            err0 = sys.exc_info()[0]
+            results[self.name][self.version] = {}
+            results[self.name][self.version]['_error'] = str(err1)
 
         return results
 
