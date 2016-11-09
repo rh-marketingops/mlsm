@@ -20,6 +20,9 @@ def basic_fcn_add(data, results):
     resultsReturn['c'] = c
     return resultsReturn
 
+def basic_fcn_error(data, results):
+    raise Exception('Hi! I am an error message')
+
 def basic_sum_fcn(data, results):
     x = results['test']['0.0.0']['c']
     y = x + 5
