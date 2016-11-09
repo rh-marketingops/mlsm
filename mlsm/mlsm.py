@@ -120,19 +120,24 @@ class Model(object):
         :param dict results: result set to which output is appended
         """
 
+        results[self.name] = {}
+        fieldError = None
+
         for field in self.fields.keys():
             if field not in data.keys():
-                raise Exception("Expected 'data' input '" + field + "' not found")
+                results[self.name][self.version] = {}
+                results[self.name][self.version]['_error'] = "Expected 'data' input '" + field + "' not found"
+                fieldError = 1
 
-        results[self.name] = {}
-        try:
-            results[self.name][self.version] = self.fcn(data=data, results=results)
-            results[self.name][self.version]['_status'] = self.status
-        except:
-            err1 = sys.exc_info()[1]
-            err0 = sys.exc_info()[0]
-            results[self.name][self.version] = {}
-            results[self.name][self.version]['_error'] = str(err1)
+        if not fieldError:
+            try:
+                results[self.name][self.version] = self.fcn(data=data, results=results)
+                results[self.name][self.version]['_status'] = self.status
+            except:
+                err1 = sys.exc_info()[1]
+                err0 = sys.exc_info()[0]
+                results[self.name][self.version] = {}
+                results[self.name][self.version]['_error'] = str(err1)
 
         return results
 

@@ -81,10 +81,10 @@ def test_modelRunReturnErrorMessage():
     results = testmodel.execute(data={'a': 1, 'b': 2}, results={})
     assert results['test'][version]['_error']=='Hi! I am an error message'
 
-@raises(Exception)
-def test_modelExecRejectMissingDataFields():
+def test_modelMissingFieldsRunReturnErrorField():
     testmodel = mlsm.Model(name='test', fields=test_fcn.basic_fcn_add_fieldset, version=version, fcn = test_fcn.basic_fcn_add)
     results = testmodel.execute(data={'a': 1}, results={})
+    assert '_error' in results['test'][version]
 
 ###############################################################################
 ## Summary model class
