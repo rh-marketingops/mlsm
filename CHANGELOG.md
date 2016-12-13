@@ -1,4 +1,4 @@
-## TBD v0.0.4
+## 2016-12-13 v0.0.4
 - Added docs
 - Improved Model.execute validation
   - Returns errors during `self.fcn()` in a results field `results/model/version/_error`
