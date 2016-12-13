@@ -38,3 +38,38 @@ def basic_sum_fcn_multiple(data, results):
     resultsReturn = {}
     resultsReturn['d'] = y
     return resultsReturn
+
+############################################################
+## Fcns for unit testing
+############################################################
+
+passes_intSingle_fieldset = {
+    'a': int
+}
+
+def passes_intSingle(data, results):
+    x = data['a'] + 1
+    resultsReturn = {}
+    resultsReturn['x'] = x
+    return resultsReturn
+
+passes_intMultiple_fieldset = {
+    'a': int,
+    'b': int
+}
+
+def passes_intMultiple(data, results):
+    x = data['a'] + data['b']
+    resultsReturn = {}
+    resultsReturn['x'] = x
+    return resultsReturn
+
+fails_intSingle_fieldset = {
+    'a': int
+}
+
+def fails_intSingle(data, results):
+    x = data['a'] + 'lorem ipsum'
+    resultsReturn = {}
+    resultsReturn['x'] = x
+    return resultsReturn
