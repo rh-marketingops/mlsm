@@ -141,6 +141,36 @@ class Model(object):
 
         return results
 
+    def test(self):
+        """
+        Uses model fields as defined to run a test with very basic data to validate that passing the expected data types does not result in errors
+        """
+
+        # Generate input data set
+
+        testData = {}
+
+        x = 0
+        for row in self.fields:
+            y = self.fields[row]
+            if y==int:
+                testData[row] = 1
+            if y==str:
+                testData[row] = 'lorem ipsum'
+            if y==bool:
+                testData[row] = True
+            if y==float:
+                testData[row] = 1.2
+
+        x = self.execute(data=testData, results={})
+
+        if '_error' in x[self.name][self.version]:
+            outcome = False
+        else:
+            outcome = True
+
+        return outcome
+
 class SummaryModel(Model):
     """
     Extension of Model; also validates input 'results' parameter to 'execute' to ensure results from previous models can be used
