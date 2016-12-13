@@ -299,3 +299,18 @@ def test_RunModelTest_Fails_IntSingle():
     testmodel = mlsm.Model(name='test', fields=test_fcn.fails_intSingle_fieldset, version=version, fcn=test_fcn.fails_intSingle)
     result = testmodel.test()
     assert not result
+
+def test_RunModelTest_Passes_StrSingle():
+    testmodel = mlsm.Model(name='test', fields=test_fcn.passes_strSingle_fieldset, version=version, fcn=test_fcn.passes_strSingle)
+    result = testmodel.test()
+    assert result
+
+def test_RunModelTest_Passes_StrMultiple():
+    testmodel = mlsm.Model(name='test', fields=test_fcn.passes_strMultiple_fieldset, version=version, fcn=test_fcn.passes_strMultiple)
+    result = testmodel.test()
+    assert result
+
+def test_RunModelTest_Fails_StrSingle():
+    testmodel = mlsm.Model(name='test', fields=test_fcn.fails_strSingle_fieldset, version=version, fcn=test_fcn.fails_strSingle)
+    result = testmodel.test()
+    assert not result

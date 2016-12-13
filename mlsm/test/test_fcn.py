@@ -73,3 +73,34 @@ def fails_intSingle(data, results):
     resultsReturn = {}
     resultsReturn['x'] = x
     return resultsReturn
+
+passes_strSingle_fieldset = {
+    'a': str
+}
+
+def passes_strSingle(data, results):
+    x = data['a'] + ' test'
+    resultsReturn = {}
+    resultsReturn['x'] = x
+    return resultsReturn
+
+passes_strMultiple_fieldset = {
+    'a': str,
+    'b': str
+}
+
+def passes_strMultiple(data, results):
+    x = data['a'] + ' ' + data['b']
+    resultsReturn = {}
+    resultsReturn['x'] = x
+    return resultsReturn
+
+fails_strSingle_fieldset = {
+    'a': str
+}
+
+def fails_strSingle(data, results):
+    x = data['a'] + 1
+    resultsReturn = {}
+    resultsReturn['x'] = x
+    return resultsReturn
